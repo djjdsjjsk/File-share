@@ -1,0 +1,19 @@
+services:
+  - type: worker
+    name: telegram-file-store-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python osint.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: CHANNEL_ID
+        sync: false
+      - key: DATABASE_PATH
+        value: /var/data/files.db
+    disk:
+      name: file-store-data
+      mountPath: /var/data
+      sizeGB: 1
